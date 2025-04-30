@@ -75,6 +75,28 @@ const createcategory = async (req, res) => {
 
 
 
+const categoryById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Make sure to await the database call
+    const categoryDetails = await Category.findById(id);
+
+    if (!categoryDetails) {
+      return res.status(404).send("Category not found");
+    }
+
+    res.status(200).json(categoryDetails);
+  } catch (error) {
+    console.error("Error fetching category:", error);
+    res.status(500).send("Server error");
+  }
+};
+
+
+
+
+
 
 
 
@@ -89,5 +111,6 @@ const createcategory = async (req, res) => {
 module.exports = {
   getAllCategories,
   deleteCategory,
-  createcategory
+  createcategory,
+  categoryById
 };

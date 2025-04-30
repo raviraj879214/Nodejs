@@ -2,17 +2,18 @@ const express = require('express');
 const router = express.Router();
 const {login} = require('../controllers/LoginController');
 const {verifyToken} = require('../controllers/VerifyTokenController');
-const { getAllCategories, deleteCategory ,createcategory } = require('../controllers/CategoryController');
+const { getAllCategories, deleteCategory ,createcategory ,categoryById} = require('../controllers/CategoryController');
 
 router.post('/login',login);
 router.post('/verify-token',verifyToken);
 router.get('/get-category',getAllCategories);
 
-router.delete('/delete-categories/:id', deleteCategory);
-router.post('/create-product',createcategory);
-
 
 //category controller
+router.delete('/delete-categories/:id', deleteCategory);
+router.post('/create-product',createcategory);
+router.get('/get-cat/:id',categoryById);
+
 
 
 module.exports = router;
