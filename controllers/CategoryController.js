@@ -97,6 +97,42 @@ const categoryById = async (req, res) => {
 
 
 
+const updatecreatecategory = async (req, res) => {
+  try {
+    const { _id, Categoryname, CatURL } = req.body;
+
+    let categoryDetails;
+
+    if (_id) {
+      
+      categoryDetails = await Category.findByIdAndUpdate(
+        _id,
+        { Categoryname, CatURL },
+        { new: true }
+      );
+    } else {
+      
+      categoryDetails = new Category({ Categoryname, CatURL });
+      await categoryDetails.save();
+    }
+
+    res.status(200).json({
+      success: true,
+      message: _id ? "Category updated successfully" : "Category created successfully",
+      data: categoryDetails,
+    });
+  } catch (error) {
+    console.error("Error in updateCreateCategory:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};
+
+
+
 
 
 
@@ -112,5 +148,6 @@ module.exports = {
   getAllCategories,
   deleteCategory,
   createcategory,
-  categoryById
+  categoryById,
+  updatecreatecategory
 };
