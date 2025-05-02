@@ -28,6 +28,7 @@ app.use(cors());
 connectMongoDB();
 
 
+app.use('/uploads', express.static('uploads'));
 app.use('/api', userRoutes);
 
 

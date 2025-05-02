@@ -2,8 +2,13 @@
 const mongoose = require('mongoose');
 
 const connectMongoDB = async () => {
+  const url ="mongodb+srv://ravirajalphainfo:z3ktajRmpVBkzVyA@cluster0.wljvwi1.mongodb.net/ecommerce";
+  // const url ="mongodb://localhost:27017/ecommerce";
+
+
+
   try {
-    await mongoose.connect('mongodb+srv://ravirajalphainfo:z3ktajRmpVBkzVyA@cluster0.wljvwi1.mongodb.net/ecommerce', {
+    await mongoose.connect(`${url}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
