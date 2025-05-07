@@ -6,7 +6,7 @@ const Product = require('../models/Product');
 
 exports.createProduct = async (req, res) => {
   try {
-    const { name, description, price, stock, categoryId } = req.body;
+    const { name, description, price, stock, categoryId ,ProductUrl } = req.body;
     const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
 
     const newProduct = new Product({
@@ -15,7 +15,8 @@ exports.createProduct = async (req, res) => {
       price,
       stock,
       imageUrl,
-      categoryId
+      categoryId,
+      ProductUrl
     });
 
     await newProduct.save();
@@ -123,6 +124,25 @@ exports.updateProduct = async (req,res) =>{
 
 }
 
+
+
+
+exports.getProductByUrl = async (req, res) => {
+  try {
+    const { ProductUrl } = req.params;
+
+    const productDetails = await Product.findOne({ ProductUrl });
+
+    if (!productDetails) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    res.status(200).json(productDetails);
+  } catch (error) {
+    console.error('Error fetching product by URL:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 
 

@@ -6,6 +6,7 @@ const productSchema = new mongoose.Schema({
   price: Number,
   stock: Number,
   imageUrl: String,
+  ProductUrl : String,
   categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }
 }, { timestamps: true });
 
